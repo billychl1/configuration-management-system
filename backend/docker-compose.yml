@@ -35,6 +35,25 @@ services:
     networks:
       - config-network
 
+  config-service:
+    build:
+      context: .
+      dockerfile: ./config-service/Dockerfile
+    ports:
+      - "8082:8082"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/configdb
+      SPRING_DATASOURCE_USERNAME: configuser
+      SPRING_DATASOURCE_PASSWORD: configpass
+      JWT_SECRET: 8Zz5tw0Ionm3XPZZfN0NOml3z9FMfmpgXwovR9fp6ryDIoGRM8EPHAB6iHsc0fb
+    depends_on:
+      mysql:
+        condition: service_healthy
+      user-service:
+        condition: service_started
+    networks:
+      - config-network
+
 volumes:
   mysql-data:
 
