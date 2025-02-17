@@ -1,0 +1,43 @@
+services:
+  mysql:
+    image: mysql:8.0.28
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: configdb
+      MYSQL_USER: configuser
+      MYSQL_PASSWORD: configpass
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - config-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  user-service:
+    build:
+      context: .
+      dockerfile: ./user-service/Dockerfile
+    ports:
+      - "8081:8081"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/configdb
+      SPRING_DATASOURCE_USERNAME: configuser
+      SPRING_DATASOURCE_PASSWORD: configpass
+      JWT_SECRET: 8Zz5tw0Ionm3XPZZfN0NOml3z9FMfmpgXwovR9fp6ryDIoGRM8EPHAB6iHsc0fb
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - config-network
+
+volumes:
+  mysql-data:
+
+networks:
+  config-network:
+    driver: bridge
