@@ -1,0 +1,111 @@
+::ng-deep {
+  .cdk-overlay-container {
+    z-index: 1000;
+
+    .cdk-overlay-connected-position-bounding-box {
+      position: static !important;
+    }
+
+    .cdk-overlay-pane {
+      position: absolute !important;
+      min-width: 84px !important;
+      transform-origin: center top !important;
+      margin: 0 !important;
+    }
+
+    .cdk-overlay-backdrop.cdk-overlay-transparent-backdrop {
+      background: rgba(0, 0, 0, 0.05);
+    }
+  }
+
+  .mat-mdc-select-panel {
+      background: white !important;
+      border-radius: 4px !important;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.08) !important;
+      min-width: 84px !important;
+      max-height: 256px !important;
+      position: relative !important;
+      overflow-y: auto !important;
+
+      .mat-mdc-option {
+        min-height: 36px !important;
+        line-height: 36px !important;
+        padding: 0 16px !important;
+        font-size: 14px !important;
+        
+        &.mdc-list-item--selected {
+          background-color: rgba(0, 0, 0, 0.08) !important;
+        }
+        
+        &:hover:not(.mdc-list-item--selected) {
+          background-color: rgba(0, 0, 0, 0.04) !important;
+        }
+
+        .mdc-list-item__primary-text {
+          color: rgba(0, 0, 0, 0.87);
+        }
+      }
+    
+
+    .mat-mdc-paginator {
+      .mat-mdc-paginator-page-size {
+        align-items: center;
+        height: 56px;
+        
+        .mat-mdc-paginator-page-size-select {
+          width: 56px !important;
+          margin: 0 4px !important;
+          
+          .mat-mdc-select-trigger {
+            height: 36px !important;
+          }
+
+          .mat-mdc-select-value {
+            max-width: 100% !important;
+            padding: 0 8px !important;
+          }
+        }
+      }
+    }
+  }
+}
+
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  position: relative;
+}
+
+.content {
+  padding: 20px;
+  position: relative;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+mat-table {
+  width: 100%;
+}
+
+.mat-column-actions {
+  width: 100px;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .content {
+    padding: 10px;
+  }
+  
+  .mat-column-description {
+    display: none;
+  }
+}
